@@ -6,7 +6,6 @@ height:80px;
 width:100%;
 top:0;
 position:sticky;
-border:1px solid #000;
 z-index:9;
 `
 const Image = styled.img`
@@ -33,15 +32,18 @@ const Online = styled.div`
   font-weight:400;
 `;
 const Header = ({ chat, currentUser,onlineUsers }) => {
+  console.log(currentUser);
   const [data, setData] = useState(null);
   useEffect(() => {
     const friendsId = chat?.members?.find((f) => f.id !== currentUser._id);
+    console.log(friendsId);
     const getFriend = async () => {
       try {
         const res = await axios.get(
           `http://localhost:5000/api/auth/${friendsId}`
         );
         setData(res.data);
+        console.log(res.data);
       } catch (error) {
         console.log(error);
       }
